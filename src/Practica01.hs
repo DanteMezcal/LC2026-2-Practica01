@@ -62,8 +62,8 @@ conjuntoPotencia = undefined
 
 --Implementacion
 
-data Tree a = Undefinedd
+data OneTwoTree a = Undefinedd
 
 --Ejercicio 2
-suma :: Tree Int -> Int
+suma :: OneTwoTree Int -> Int
 suma = undefined
