@@ -22,13 +22,16 @@ Si no les llegan a funcionar, es posible que el problema es que tengan una versi
 
 En esta sección deben eliminar esta línea de texto, borrar la leyenda "Integrante n" y escribir su nombre empezando por apellidos y su número de cuenta.
 
-+ Integrante 1
-    - No. de Cuenta: 
++ Carriche Arriaga Dante Raziel
+    - No. de Cuenta: 322037461
 + Integrante 2
     - No. de Cuenta: 
 + Integrante 3
     - No. de Cuenta: 
 
 ## Comentarios
+
+Al momento de pasar todas las pruebas, no aperecia un reporte de los metodos, mas sin embargo, solo salia un mensaje
+indicando que se habia superado el archivo de pruebas.
 
 Recuerden que opcionalmente pueden agregar un comentario (ver los lineamientos de entrega). Si es el caso, borren esta línea y dejen su comentario.
