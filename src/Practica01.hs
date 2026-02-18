@@ -63,33 +63,36 @@ timeToWork h
 
 --LISTAS Y FUNCIONES
 --Ejercicio 1
-palindromo :: (Eq a) => [a] -> Bool
-palindromo [] = True
+palindromo :: String -> Bool
+palindromo []  = True
 palindromo [_] = True
-palindromo (x:xs) = if x == myLast xs  --Implemento mis propias funciones init y last
-                then palindromo (myInit xs) 
-                else False
+palindromo (x:xs) = x == ultimo (x:xs) && palindromo (sinExtremos (x:xs))
 
---Funcion auxiliar para palindromo
-myInit :: [a] -> [a]
-myInit [] = []
-myInit [_] = []
-myInit (x:xs) = x:myInit xs
+-- Funciones complementarias para palindromo
+ultimo :: String -> Char
+ultimo [] = ' '
+ultimo [x] = x
+ultimo (_:xs) = ultimo xs
 
---Funcion auxiliar para palindromo
-myLast :: [a] -> a
-myLast [a] = a
-myLast (x:xs) = myLast xs
+sinExtremos :: String -> String
+sinExtremos [] = []
+sinExtremos [_] = []
+sinExtremos (_:xs) = quitarUltimo xs
+
+quitarUltimo :: String -> String
+quitarUltimo [] = []
+quitarUltimo [_] = []
+quitarUltimo (x:xs) = x : quitarUltimo xs
 
 --Ejercicio 2
 myFoldr :: (a -> b -> b) -> b -> [a] -> b
-myFoldr _ b [] = b
-myFoldr function b (x:xs) = function x (myFoldr function b xs)
+myFoldr _ z [] = z
+myFoldr y z (x:xs) = y x (myFoldr y z xs)
 
 --Ejercicio 3
 conjuntoPotencia :: [a] -> [[a]]
 conjuntoPotencia [] = [[]]
-conjuntoPotencia (x:xs) = [x:y | y <- conjuntoPotencia xs] ++ conjuntoPotencia xs
+conjuntoPotencia (x:xs) = [ x:ys | ys <- conjuntoPotencia xs] ++ conjuntoPotencia xs
 
 --ARBOLES
 
