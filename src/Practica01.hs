@@ -12,55 +12,54 @@ data Shape = Circle Float | --representa el radio
 
 --Funcion que calcula el area de las figuras
 area :: Shape -> Float
-area (Circle r) = pi * r**2
-area (Square l) = l**2
-area (Rectangle b h) = b * h
-area (Triangle l) = (sqrt 3 / 4) * l**2
-area (Trapeze bM bm h) = ((bM + bm) * h) / 2
+area(Circle r) = pi * r * r
+area(Square l) = l * l
+area(Rectangle b h) = b * h
+area(Triangle l) = (sqrt 3 / 4) * l * l
+area(Trapeze bM bN h) = ((bM + bN) / 2) * h
 
 --Funcion que calcula el perimetro de las figuras
 perimeter :: Shape -> Float
-perimeter (Circle r) = 2 * pi * r
-perimeter (Square l) = 4 * l
-perimeter (Rectangle b h) = 2 * b + 2 * h
-perimeter (Triangle l) = 3 * l 
-perimeter (Trapeze bM bm h) = bM + bm + 2 * sqrt (h**2 + ((bM- bm) / 2)**2)
+perimeter(Circle r) = 2 * pi * r
+perimeter(Square l) = 4 * l
+perimeter(Rectangle b h) = 2 * (b + h)
+perimeter(Triangle l) = 3 * l
+perimeter(Trapeze bM bm h) = bM + bm + 2 * sqrt (h**2 + ((bM- bm) / 2)**2)
 
 --Ejercicio 2 (Les toca arreglar el sinonimo)
 type Point = (Float, Float)
 
 -- Funcion para calcular la distancia entre dos puntos
 distance :: Point -> Point -> Float
-distance (x1, y1) (x2, y2) =  sqrt ((x2 - x1)**2 + (y2 - y1)**2)
-
+distance (x1, y1) (x2, y2) = sqrt ((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1))
 --Funcion para calcular la distancia de un punto al origen
 from0 :: Point -> Float
-from0 (x1, y1) = distance (x1, y1) (0,0)
+from0 (x, y) = sqrt (x * x + y * y)
 
 --Ejercicio 3
 data Haskellium = Haskellium {name :: String,
-                    lastName1 :: String,
-                    lastName2 :: String, 
-                    location :: Point,
-                    houseShape :: Shape} deriving Show
+                            lastName1 :: String,
+                            lastName2 :: String,
+                            location :: Point,
+                            houseShape :: Shape} deriving (Show, Eq)
 
 --Funcion para regresar el hijo de dos Haskelliums dado su nombre
 son :: Haskellium -> Haskellium -> String -> Haskellium
-son h1 h2 n = Haskellium{name = n, 
-                        lastName1 = lastName1 h1, 
-                        lastName2 = lastName1 h2, 
-                        location = location h2,
-                        houseShape = houseShape h2}
+son h1 h2 n = Haskellium {name = n,
+                        lastName1 = lastName1 h1,
+                        lastName2 = lastName1 h2,
+                        location = location h1,
+                        houseShape = houseShape h1}
 
 --Funcion para calcular las unidades para construir la casa de un Haskellium
 houseCost :: Haskellium -> Float
-houseCost hkm = 2.5 * (perimeter (houseShape hkm)) + area (houseShape hkm)
+houseCost h = area (houseShape h) + perimeter (houseShape h) * 2.5 --Considerando el área como el techo de la casa y el perímetro como las paredes, con una altura de 2.5 unidades
 
 --Funcion para calcular el tiempo que le toma a un Haskellium para llegar a su trabajo
 timeToWork :: Haskellium -> Float
-timeToWork h1 = if from0(location h1) < 300 
-    then from0(location h1) / 30 --si es menor a 300 se van en bici a 30u/t
-    else from0(location h1) / 70 --si es mayor a 300 se van en moto a 70u/t
+timeToWork h
+    | from0 (location h) <= 300 = from0(location h) / 30 --Si esta a 300 unidades o menos, usa bicicleta a 30 unidades por hora
+    | otherwise = from0(location h) / 70 --Si esta a mas de 300 unidades, usa moto a 70 unidades por hora
 
 --LISTAS Y FUNCIONES
 --Ejercicio 1
